@@ -1,8 +1,8 @@
-#include <windows.h>
 #include <stdio.h>
 #include <stdint.h>
-#include <assert.h>
-
+#include <wchar.h>
+#include <string.h>
+#include <windows.h>
 #include "verface.h"
 #include "err.h"
 #include "errcodes.h"
@@ -73,7 +73,7 @@ int
 ver_getCurrID(ver_env* env)
 {
     if (env->status == VER_WORK) {
-        //Celan error and set current "Verba" action
+        //Clean error and set current "Verba" action
         ver_clean_error(env);
         env->action = VER_GETCURRID;
         

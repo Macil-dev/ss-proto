@@ -2,8 +2,10 @@
 #include <windows.h>
 #include <io.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
-#include <assert.h>
+#include <wchar.h>
+#include <string.h>
 
 #include "verface.h"
 #include "env.h"
@@ -42,6 +44,7 @@ main(int argc, char** argv)
 #endif //#ifdef VER_MSVC_UNICODE_QUIRK
         if (argc < 3) {
             usage();
+            return 1;
         }
         int e = 0;
         ver_env *env = malloc(sizeof(ver_env));
@@ -60,7 +63,7 @@ main(int argc, char** argv)
             wchar_t signidb[VER_SIGN_ID_LENGTH+1];
             wmemset(signidb, 0, VER_SIGN_ID_LENGTH+1);
             const char *env_signid = env->signId;
-            mbsrtowcs(signidb, &env_signid, VER_SIGN_ID_LENGTH);
+            mbsrtowcs(signidb, &env_signid, VER_SIGN_ID_LENGTH, NULL);
             wprintf(L"Загружены ключи: %s - %s\n", encridb, signidb);
         } else {
             report_error(env);
